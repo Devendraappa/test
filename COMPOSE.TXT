@@ -6,3 +6,26 @@ cp .env.example .env
 sudo mkdir -p /var/openproject/assets
 sudo chown 1000:1000 -R /var/openproject/assets
 OPENPROJECT_HTTPS=false docker compose up -d --build --pull always
+OPENPROJECT_HTTPS=false docker compose up -d --build --pull always
+
+
+TAG=15-slim
+OPENPROJECT_HTTPS=false
+OPENPROJECT_HOST__NAME=localhost
+PORT=127.0.0.1:8080
+OPENPROJECT_RAILS__RELATIVE__URL__ROOT=
+IMAP_ENABLED=false
+DATABASE_URL=postgres://postgres:p4ssw0rd@db/openproject?pool=20&encoding=unicode&reconnect=true
+RAILS_MIN_THREADS=4
+RAILS_MAX_THREADS=16
+PGDATA="/var/lib/postgresql/data"
+OPDATA="/var/openproject/assets"
+TAG=15-slim
+OPENPROJECT_HTTPS=false
+OPENPROJECT_HOST__NAME=13.126.248.133:8080
+DATABASE_URL=postgres://postgres:p4ssw0rd@db/openproject?pool=20&encoding=unicode&reconnect=true
+PGDATA=pgdata
+OPDATA=opdata
+POSTGRES_PASSWORD=p4ssw0rd
+PORT=8080
+root@ip-172-31-33-28:/home/ubuntu/openproject# ^C
