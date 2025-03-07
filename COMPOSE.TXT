@@ -1,3 +1,8 @@
 sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
+git clone https://github.com/opf/openproject-deploy --depth=1 --branch=stable/15 openproject
+cp .env.example .env
+sudo mkdir -p /var/openproject/assets
+sudo chown 1000:1000 -R /var/openproject/assets
+OPENPROJECT_HTTPS=false docker compose up -d --build --pull always
