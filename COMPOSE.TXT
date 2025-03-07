@@ -153,3 +153,58 @@ services:
     restart: on-failure
     networks:
       - backend
+
+
+
+1  sudo apt install -y docker-compose
+    2  sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    3  docker-compose --version
+    4  git clone https://github.com/opf/openproject-deploy --depth=1 --branch=stable/15 openproject
+    5  ls
+    6  cd openproject/
+    7  cp .env.example .env
+    8  sudo mkdir -p /var/openproject/assets
+    9  OPENPROJECT_HTTPS=false docker compose up -d --build --pull always
+   10  docker-compose up -d --build --pull always
+   11  docker ps -a
+   12  echo "TAG=15-slim" >> .env
+   13  ls
+   14  cat .env
+   15  echo "TAG=15-slim" >> .env
+   16  echo "OPENPROJECT_HTTPS=false" >> .env
+   17  echo "OPENPROJECT_HOST__NAME=13.200.243.88:8080" >> .env
+   18  echo "DATABASE_URL=postgres://postgres:p4ssw0rd@db/openproject?pool=20&encoding=unicode&reconnect=true" >> .env
+   19  echo "PGDATA=pgdata" >> .env
+   20  echo "OPDATA=opdata" >> .env
+   21  echo "POSTGRES_PASSWORD=p4ssw0rd" >> .env
+   22  echo "PORT=8080" >> .env
+   23  export $(grep -v '^#' .env | xargs)
+   24  docker-compose up -d --build --pull always
+   25  ls
+   26  mv docker-compose.yml docker-compose1.yml
+   27  nano docker-compose.yaml
+   28  version: '3.8'
+   29  networks:
+   30  volumes:
+   31  x-op-restart-policy: &restart_policy
+   32  x-op-image: &image
+   33  x-op-app: &app
+   34  docker-compose down
+   35  docker-compose pull
+   36  docker-compose build
+   37  docker-compose up -d
+   38  docker ps -a
+   39  rm -rf docker-compose.yaml
+   40  mv docker-compose1.yml docker-compose.yml
+   41  docker-compose down
+   42  docker-compose up
+   43  docker-compose up -d
+   44  docker-compose up
+   45  cat docker-compose.yml
+   46  nano docker-compose.yml
+   47  nano docker-compose.yml docker-compose down
+   48  docker-compose down
+   49  docker-compose pull
+   50  docker-compose build
+   51  docker-compose up -d
+   52  docker-compose up
