@@ -27,4 +27,4 @@ jobs:
 
       - name: Sync Files to S3
         run: |
-          aws s3 sync . s3://mytest-1909 --exclude ".git/*"
+          aws s3 sync . s3://buck12359 --exclude ".git/*"
