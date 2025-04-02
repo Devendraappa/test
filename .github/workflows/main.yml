@@ -27,5 +27,5 @@ jobs:
 
       - name: Sync Files to S3
         run: |
-         aws s3 sync . s3://buck12359 --exclude "*" --include "*.pdf"
+         aws s3 sync . s3://document-processing-bucket123 --exclude "*" --include "*.pdf"
 
