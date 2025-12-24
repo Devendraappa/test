@@ -45,4 +45,3 @@ jobs:
           path: dotnetcorewebapp/**
           if-no-files-found: error       # fail fast if folder is empty/non-existent
           retention-days: 7
-``
