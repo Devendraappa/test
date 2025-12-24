@@ -1,35 +1,48 @@
+
 name: .NET Core
 
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout GutHub actions
-      uses: actions/checkout@v3
+      - name: Checkout GitHub Actions
+        uses: actions/checkout@v4
 
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.301
+      - name: Setup .NET (3.1.301)
+        # .NET Core 3.1 is end-of-life, but if you need this exact SDK:
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 3.1.301
 
-    - name: Install dependencies
-      run: dotnet restore
+      - name: Restore
+        run: dotnet restore
 
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
+      - name: Build (Release)
+        run: dotnet build --configuration Release --no-restore
 
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      - name: Test
+        run: dotnet test --no-restore --verbosity normal
 
-    - name: Publish
-      run: dotnet publish -c Release -o dotnetcorewebapp
+      - name: Publish (Release to ./dotnetcorewebapp)
+        run: dotnet publish -c Release -o dotnetcorewebapp
 
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v3
-      with:
-       name: my-artifact
-       path: "./dotnetcorewebapp"
+      # ---- Diagnostics to ensure files exist before upload ----
+      - name: List publish output
+        run: |
+          echo "Contents of ./dotnetcorewebapp:"
+          ls -la ./dotnetcorewebapp || (echo "Publish output folder missing" && exit 1)
+          echo "Files:"
+          find ./dotnetcorewebapp -type f -maxdepth 2 -print
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact
+          path: dotnetcorewebapp/**
+          if-no-files-found: error       # fail fast if folder is empty/non-existent
+          retention-days: 7
+``
